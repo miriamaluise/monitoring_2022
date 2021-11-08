@@ -24,7 +24,7 @@ plot(l2011,col=cl)
 plotRGB(l2011, r=3, g=2, b=1,stretch="Lin")
 
 
-#________day 2
+#_____________________________________________________________________________________________________________________________________day 2
 #B1 is the refecltance in the blue bend
 #B2 is the reflectance in the green bend
 #B3 is the reflectance in the red bend
@@ -54,6 +54,78 @@ plot(l2011$B2_sre, col=clg)
 par(mfrow=c(2,1))
 plot(l2011$B1_sre, col=clb)
 plot(l2011$B2_sre, col=clg)
+
+
+#_____________________________________________________________________________________________________________________day 3
+plot(l2011$B1_sre) #blue wavelenght
+clb <- colorRampPalette(c("dark blue", "blue", "light blue")) (100)
+plot(l2011$B1_sre, col=clb)
+#let's plot the green bend
+plot(l2011$B2_sre)
+clg <- colorRampPalette (c("dark green", "green", "light green")) (100)
+plot(l2011$B2_sre, col=clg)
+
+
+# multiframe
+par(mfrow=c(1,2)) # the first number is the number of rows in the multiframe, while the second one is the mnumber of columns
+
+# plot the blue and the green besides, with different colorRampPalette
+clb <- colorRampPalette(c("dark blue","blue","light blue"))(100)
+plot(l2011$B1_sre, col=clb)
+
+clg <- colorRampPalette(c("dark green","green","light green"))(100)
+plot(l2011$B2_sre, col=clg)
+par(mfrow=c(2,1)) # the first number is the number of rows in the multiframe, while the second one is the mnumber of columns
+
+
+# plot the blue and the green besides, with different colorRampPalette
+clb <- colorRampPalette(c("dark blue","blue","light blue"))(100)
+plot(l2011$B1_sre, col=clb)
+
+clg <- colorRampPalette(c("dark green","green","light green"))(100)
+plot(l2011$B2_sre, col=clg)
+
+par(mfrow=c(2,2)) # the first number is the number of rows in the multiframe, while the second one is the mnumber of columns
+
+# Exercise: plot the first four bands with two rows and two columns
+par(mfrow=c(2,2)) # the first number is the number of rows in the multiframe, while the second one is the mnumber of columns
+
+clb <- colorRampPalette(c("dark blue","blue","light blue"))(100)
+plot(l2011$B1_sre, col=clb)
+
+clg <- colorRampPalette(c("dark green","green","light green"))(100)
+plot(l2011$B2_sre, col=clg)
+
+clr <- colorRampPalette(c("dark red","red","pink"))(100)
+plot(l2011$B3_sre, col=clr)
+
+#we should clean the window with the function dev.off()
+dev.off()
+#plotRGB function
+plotRGB(l2011, r=3, g=2, b=1, stretch="Lin")
+#we insert the NIR
+plotRGB(l2011,r=4, g=3, b=2, stretch="Lin") #false colour
+#let's put the NIR in the green 
+plotRGB(l2011, r=3, g=4, b=2, stretch="Lin")
+#let's put the NIR in the blue
+plotRGB(l2011, r=3, g=2, b=4, stretch="Lin")
+
+#multiframe with all these images
+par(mfrow=c(2,2))
+plotRGB(l2011, r=3, g=2, b=1, stretch="Lin")
+plotRGB(l2011, r=4, g=3, b=2, stretch="Lin")
+plotRGB(l2011, r=3, g=4, b=2, stretch="Lin")
+plotRGB(l2011, r=3, g=2, b=4, stretch="Lin")
+
+
+
+
+
+
+
+
+
+
 
 
 

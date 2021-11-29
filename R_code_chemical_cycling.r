@@ -71,10 +71,47 @@ plot(EN$EN_0001, col=cl)
 # rgb
 plotRGB(EN, r=1, g=7, b=13, stretch="lin")
 
-# difference
 
-# pairs
-pairs(EN)
+#__________________________________day 2
 
-# direct import
+#how to import all data together with the lapply function
+#first build a list explaining to the software what are the images that we want to import directly with the function list.files
+library(raster)
+setwd("C:/lab/en/")
+rlist <- list.files(pattern="EN")
+rlist #is the name of our list
+
+#now we can apply the lapply function
+list_rast <- lapply(rlist, raster)
+list_rast #shows all the file which have been imported
+
+#every images together
+EN_stack <- stack(list_rast)
+EN_stack
+
+
+cl <- colorRampPalette(c('red','orange','yellow'))(100) #
+plot(EN_stack, col=cl)
+
+#exercise: plot only the first image of the stack
+plot(EN_stack$EN_0001, col=cl)
+
+#difference between final image and the first
+ENdif<- EN_stack$EN_0001 - EN_stack$EN_0013
+cldif <- colorRampPalette(c('blue','white','red'))(100) #
+plot(ENdif, col=cldif)
+
+#how to use code build by others without copypasting
+#automated processing source function
+#importing the data from the en folder in which we saved the code that we are gonna read on r
+#use the extension when you recall it on r e.g., .txt
+source("R_script.txt")
+
+
+
+
+
+
+
+
 

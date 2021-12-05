@@ -30,12 +30,16 @@ cl <- colorRampPalette(c("black","grey","light grey"))(100)
 plot(l2011,col=cl)
 plotRGB(l2011, r=3, g=2, b=1,stretch="Lin")
 
+#plotRGB makes a Red-Green-Blue plot based on three layers
+#Three layers (sometimes referred to as "bands" because they may represent different bandwidths in the electromagnetic spectrum) are combined such that they represent the red, green and blue channel.
+
 
 #_____________________________________________________________________________________________________________________________________day 2
 #B1 is the refecltance in the blue bend
 #B2 is the reflectance in the green bend
 #B3 is the reflectance in the red bend
 #B4  is the reflectance in the NIR bend
+#NIR= Near Infrared Reflectance
 
 #let's plot the green bend
 plot(l2011$B2_sre)
@@ -52,7 +56,7 @@ plot(l2011$B1_sre)
 clb <- colorRampPalette(c("dark blue", "blue", "light blue")) (100)
 plot(l2011$B1_sre, col=clb)
 
-#plot both images in one multiframe graph
+#plot both images in one multiframe graph with the par function
 par(mfrow=c(1,2)) #the first number is the number of rows in the multiframe, the second number is the number of colomns
 plot(l2011$B1_sre, col=clb)
 plot(l2011$B2_sre, col=clg)

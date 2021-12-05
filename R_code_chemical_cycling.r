@@ -11,6 +11,9 @@ setwd("~/lab/en/") # Linux
 # setwd("/Users/name/lab/en/") # mac
 
 en01 <- raster("EN_0001.png")
+#Methods to create a RasterLayer object 
+#RasterLayer objects can be created from scratch, a file, an Extent object, a matrix, an 'image' object
+
 # what is the range of the data?
 # https://www.google.com/search?q=R+colours+names&tbm=isch&ved=2ahUKEwiF-77Z1bX0AhULtKQKHQ3WDWYQ2-cCegQIABAA&oq=R+colours+names&gs_lcp=CgNpbWcQAzIECAAQEzoHCCMQ7wMQJzoICAAQCBAeEBNQiQhYnwxgwg1oAHAAeACAAUqIAZYDkgEBNpgBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=vKKgYYWtOovokgWNrLewBg&bih=526&biw=1056#imgrc=OtMzJfyT_OwIiM
 cl <- colorRampPalette(c('red','orange','yellow'))(100) # 
@@ -59,6 +62,8 @@ plot(EN12, col=cl)
 plot(EN13, col=cl)
 
 EN <- stack(EN01, EN02, EN03, EN04, EN05, EN06, EN07, EN08, EN09, EN10, EN11, EN12, EN13)
+#Stacking vectors concatenates multiple vectors into a single vector 
+#it can be used to avoid repeating every single vector 
 
 # plot the stack altogether
 plot(EN, col=cl)

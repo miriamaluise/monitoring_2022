@@ -7,12 +7,19 @@
 #https://cran.r-project.org/web/packages/raster/index.html
 install.packages("raster")
 
-
+#everytime you need a package you have to recall it with the library function
 library(raster)
 setwd("C:/lab/")
 #we are going to import satellite data
 l2011 <- brick("p224r63_2011.grd")
+
 #objects cannot be numbers
+
+#A RasterBrick is a multi-layer raster object
+#They are typically created from a multi-layer (band) file
+#but they can also exist entirely in memory. 
+#They are similar to a RasterStack (that can be created with stack), but processing time should be shorter when using a RasterBrick 
+#Yet they are less flexible as they can only point to a single file.
 
 plot(l2011)
 #B1 is the refecltance in the blue bend

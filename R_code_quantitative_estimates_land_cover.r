@@ -66,6 +66,60 @@ proportion1992 <- data.frame(cover, prop1992)
 ggplot(proportion1992, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white")
 
 
+#_____________________________day 2
+library(raster)
+library(RStoolbox) #we are going to use this for the classification project
+library(ggplot2)
+
+setwd("C:/lab/")
+# brick
+# 1 list the files available
+rlist <- list.files(pattern="defor")
+rlist
+
+list_rast <- lapply(rlist, brick) # lapply(x, FUN)
+list_rast
+
+l1992 <- list_rast[[1]]
+l2006 <- list_rast[[2]]
+
+
+plotRGB(l1992, r=1, g=2, b=3, stretch="lin")
+
+l1992c <- unsuperClass(l1992, nClasses=2)
+#we are going to use two classes: one for forests and one for agriculture
+
+plot(l1992c$map)
+#value 1: agriculture
+#value 2: forest
+
+freq(l1992c$map)
+#value 1 34407
+#value 2 306885
+
+total <-341292
+propagri <-    34407/total
+propforest <-   306885/total
+
+#agriculture and water 0.10
+#forest 0.90
+
+#build a dataframe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

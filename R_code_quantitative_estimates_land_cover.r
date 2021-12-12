@@ -104,10 +104,47 @@ propforest <-   306885/total
 #agriculture and water 0.10
 #forest 0.90
 
-#build a dataframe
 
+# Classification of 2006
+# Unsupervised classification
+l2006c <- unsuperClass(l2006, nClasses=2) # unsuperClass(x, nClasses) 
+l2006c
 
+plot(l2006c$map)
+# forest: value 1
+# agriculture: value 2
 
+# Frequencies
+freq(l2006c$map)
+
+#  value  count
+#[1,]     1 179374 # forest
+#[2,]     2 163352 # agriculture
+
+# Proportions
+
+total <- 342726
+propagri2006 <- 163352/total
+propforest2006 <- 179374/total
+
+# build a dataframe
+cover <- c("Forest", "Agriculture")
+prop1992 <- c(propforest, propagri)
+prop2006 <- c(propforest2006, propagri2006)
+
+proportion <- data.frame(cover, prop1992, prop2006)
+
+proportion
+ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white") + ylim(0,1)
+ggplot(proportion, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white") + ylim(0,1)
+
+# plotting altogether
+
+p1 <- ggplot(proportion, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white")
+p2 <- ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")
+
+# grid.arrange(p1, p2, nrow=1)
+p1+p2
 
 
 

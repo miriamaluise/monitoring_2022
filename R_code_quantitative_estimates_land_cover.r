@@ -140,11 +140,47 @@ ggplot(proportion, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="ident
 
 # plotting altogether
 
-p1 <- ggplot(proportion, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white")
-p2 <- ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white")
+p1 <- ggplot(proportion, aes(x=cover, y=prop1992, color=cover)) + geom_bar(stat="identity", fill="white") + ylim(0,1)
+p2 <- ggplot(proportion, aes(x=cover, y=prop2006, color=cover)) + geom_bar(stat="identity", fill="white") + ylim(0,1)
 
+
+#plot 2 graphs with gridExtra
 # grid.arrange(p1, p2, nrow=1)
+#or with patchwork package
+library(patchwork)
 p1+p2
+
+#if you want ot put one graph in top of the other
+p1/p2
+#instead of using plotRGB we are going to use ggRGB
+#common stuff
+plotRGB(l1992, r=1, g=2, b=3, stretch="Lin")
+#with ggRGB
+ggRGB(l1992, r=1, g=2, b=3)
+ggRGB(l1992, r=1, g=2, b=3, stretch="lin")    
+ggRGB(l1992, r=1, g=2, b=3, stretch="hist")
+#with sqrt we are compacting the data
+ggRGB(l1992, r=1, g=2, b=3, stretch="sqrt")
+ggRGB(l1992, r=1, g=2, b=3, stretch="log")
+
+#to see all these graphs all together
+#patchwork
+gp1 <- ggRGB(l1992, r=1, g=2, b=3, stretch="lin")
+gp2 <- ggRGB(l1992, r=1, g=2, b=3, stretch="hist")
+gp3 <- ggRGB(l1992, r=1, g=2, b=3, stretch="sqrt")
+gp4 <- ggRGB(l1992, r=1, g=2, b=3, stretch="log")
+gp1 + gp2 + gp3 + gp4
+
+#multitemporal patchwork
+gp1 <- ggRGB(l1992, r=1, g=2, b=3)
+gp5 <- ggRGB(l2006, r=1, g=2, b=3)
+
+gp1 + gp5
+gp1/gp5
+
+
+
+
 
 
 

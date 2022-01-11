@@ -99,10 +99,12 @@ points(presences, pch=19)
 setwd("C:/lab/") #to tell R where to find the script
 source("R_code_source_sdm.r.txt")
 
-#in the theoretical slide of SDMs we should 
+# in the theoretical slide of SDMs we should use individuals of a species and predictors 
+preds
+# these are the predictors: elevation, precipitation, temperature, vegetation 
 
-
-datasdm <- sdmData( train=species, predictors=preds)
+# Let's explain to the model what are the training and predictors data
+datasdm <- sdmData(train=species, predictors=preds)
 
 #sdm model
 #sdm function fit and evaluate species distribution data

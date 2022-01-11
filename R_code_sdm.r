@@ -94,21 +94,25 @@ points(presences, pch=19)
 plot(preds$precipitation, col=cl)
 points(presences, pch=19)
 
+#_________________________________________________day 3
+#importing the source script
+setwd("C:/lab/") #to tell R where to find the script
+source("R_code_source_sdm.r.txt")
+
+#in the theoretical slide of SDMs we should 
 
 
+datasdm <- sdmData( train=species, predictors=preds)
 
+#sdm model
+#sdm function fit and evaluate species distribution data
+#sdm(formula, data, methods, ...)
+#occurrences is the y for the formula
+#temperature, elevation, precipitation, vegetation are the x
+m1 <- m1 <- sdm(Occurrence~temperature+elevation+precipitation+vegetation, data=datasdm, methods="glm")
 
-
-
-
-
-
-
-
-
-
-
-
+#the model produces slopes and intercepts
+#now with this model we should do the predictions
 
 
 

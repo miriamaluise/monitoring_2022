@@ -111,26 +111,40 @@ datasdm <- sdmData(train=species, predictors=preds)
 #sdm(formula, data, methods, ...)
 #occurrences is the y for the formula
 #temperature, elevation, precipitation, vegetation are the x
-m1 <- m1 <- sdm(Occurrence~temperature+elevation+precipitation+vegetation, data=datasdm, methods="glm")
+m1 <- sdm(Occurrence~temperature+elevation+precipitation+vegetation, data=datasdm, methods="glm")
 
 #the model produces slopes and intercepts
 #now with this model we should do the predictions
 
+#________________________________________________day 4 
+setwd("C:/lab/") #to tell R where to find the script
+source("R_code_source_sdm.r.txt")
+datasdm <- sdmData(train=species, predictors=preds)
+m1 <- sdm(Occurrence~temperature+elevation+precipitation+vegetation, data=datasdm, methods="glm")
 
+#now we are going to make the prediction
+p1 <- predict(m1, newdata=preds)
+p1
 
+#plot the prediction
+plot(p1, col=cl)
 
+#plot the presences on top of the prediction
+#presences is a subset of a dataset
+plot(p1, col=cl)
+points(presences, pch=17)
+#the prediction is quite good since most of the points are on the part where should be a higher probability
+#this is the final map we can do with species distribution data
 
+#now we can make a final stack to put everything together
+s1 <- stack(preds, p1)
 
+#plot the final stack
+plot(s1, col=cl)
 
+#let's change the name on the last plot
+names(s1) <- c('elevation', 'precipitation', 'temperature', 'vegetation', 'model')
+plot(s1, col=cl)
 
-
-
-
-
-
-
-
-
-
-
-
+names(s1) <- c('Elevation', 'Precipitation', 'Temperature', 'Vegetation', 'Probability')
+plot(s1, col=cl)

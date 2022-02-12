@@ -48,7 +48,7 @@ names(fcoverstack) <- c("FCOVER.1km.1", "FCOVER.1km.2", "FCOVER.1km.3")
 #now we can separate the files and assign a name to the stack elements
 fcover2018 <- fcoverstack$FCOVER.1km.2
 fcover2019 <- fcoverstack$FCOVER.1km.3
-fcover2020 <- fcoverstack$FCOVER.1km.3
+fcover2020 <- fcoverstack$FCOVER.1km.1
 
 #let's plot the image from 2018
 #using a viridis palette needed for raster files
@@ -57,22 +57,33 @@ viridis(3)
 viridis<-colorRampPalette(viridis(3))(100) 
 plot(fcover2018, col=viridis, main="Global FCOVER 2018")
 
-
-#trials
-
-png("fcover2018.png", width = 2500, height = 2500, res = 300) #no
-plot(fcover2018, col=viridis, main="Global FCOVER 2018")
-dev.off
-
 #we can save and export our file with PNG and dev.off
 #dev.off is used to close the procedure of exporting the image
-png(file="Global FCOVER 2018.png", units="cm")#no
-plot(fcover2018, col=viridis)
-dev.off
 
-png(filename = "fcover2018",
-    width = 480, height = 480, units = "px", pointsize = 12,
-     bg = "white",  res = NA, …,)
+
+png("fcover2018.png", width = 2500, height = 2500, res = 300) 
+plot(fcover2018, col=viridis, main="Global FCOVER 2018")
+dev.off()
+
+#we can try and plot the three images with ggplot
+#troppo sgranati
+p2018 <- ggplot() + geom_raster(fcover2018, mapping = aes(x=x, y=y, fill= FCOVER.1km.2)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover 2018")
+p2019 <- ggplot() + geom_raster(fcover2019, mapping = aes(x=x, y=y, fill= FCOVER.1km.3)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover 2019")
+p2020 <- ggplot() + geom_raster(fcover2020, mapping = aes(x=x, y=y, fill= FCOVER.1km.1)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover 2020")
+#the p is lower case to distinguish from the next one made with plot function and assigned with the name P2018, P2019, P2020
+
+#using the plot function for all three images
+p2018 <- plot(fcover2018, col=viridis, main="Global FCOVER 2018")
+p2019 <- plot(fcover2019, col=viridis, main="Global FCOVER 2019")
+p2020 <- plot(fcover2020, col=viridis, main="Global FCOVER 2020")
+
+#to see them all together to make a quick comparison we can use the patchwork library
+#i want to see them piled up vertically
+p2018/p2019/p2020
+
+
+
+
 
 
 

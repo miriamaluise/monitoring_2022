@@ -10,9 +10,9 @@
 library(raster) # Raster data are saved in pixels, each one represents an area on the Earth's surface.
 library(ncdf4)
 library(RStoolbox)
-library(ggplot2)
+library(ggplot2) #to make plots
 library(patchwork)
-library(viridis)
+library(viridis) #palette for plots
 
 #setting the working directory
 setwd("C:/lab/fcover/")
@@ -66,20 +66,30 @@ plot(fcover2018, col=viridis, main="Global FCOVER 2018")
 dev.off()
 
 #we can try and plot the three images with ggplot
-#troppo sgranati
+
 p2018 <- ggplot() + geom_raster(fcover2018, mapping = aes(x=x, y=y, fill= FCOVER.1km.2)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover 2018")
 p2019 <- ggplot() + geom_raster(fcover2019, mapping = aes(x=x, y=y, fill= FCOVER.1km.3)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover 2019")
 p2020 <- ggplot() + geom_raster(fcover2020, mapping = aes(x=x, y=y, fill= FCOVER.1km.1)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover 2020")
-#the p is lower case to distinguish from the next one made with plot function and assigned with the name P2018, P2019, P2020
+#the p is lower 
+#R is case sensitive
 
-#using the plot function for all three images
-p2018 <- plot(fcover2018, col=viridis, main="Global FCOVER 2018")
-p2019 <- plot(fcover2019, col=viridis, main="Global FCOVER 2019")
-p2020 <- plot(fcover2020, col=viridis, main="Global FCOVER 2020")
 
 #to see them all together to make a quick comparison we can use the patchwork library
 #i want to see them piled up vertically
 p2018/p2019/p2020
+fcover_comparison <- p2018/p2019/p2020
+
+#i want to export this
+#install package to export ggplots
+install.packages("ggpubr")
+library(ggpubr)
+ggexport(fcover_comparison, filename= "fcovercomparison.png", width = 2500, height = 2500, res = 300)
+
+#now i want to make a close up to the Brasil area
+#i need the crop function to search for the data in a specific region
+#to do so i have to put the coordinates for longitude and latidute
+#Brazil is located at latitude -14.235004 and longitude -51.92528.
+
 
 
 

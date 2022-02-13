@@ -102,6 +102,7 @@ c2018<- ggplot() + geom_raster(crop2018, mapping = aes(x=x, y=y, fill= FCOVER.1k
 c2020 <- ggplot() + geom_raster(crop2020, mapping = aes(x=x, y=y, fill= FCOVER.1km.1)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover Brasil 2020")
 
 fcover_brasil_comparison<-c2018/c2020
+#changes in the spatial extent of vegetation in two years
 
 #export this
 ggexport(fcover_brasil_comparison, filename= "fcoverbrasilcomparison.png", width = 2500, height = 2500, res = 300)

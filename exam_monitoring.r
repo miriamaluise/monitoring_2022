@@ -108,7 +108,7 @@ fcover_brasil_comparison<-c2018/c2020
 ggexport(fcover_brasil_comparison, filename= "fcoverbrasilcomparison.png", width = 2500, height = 2500, res = 300)
 
 
-
+#i want to quantify these data
 
 
 

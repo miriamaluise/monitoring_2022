@@ -24,7 +24,7 @@ setwd("C:/lab/fcover/")
 #making a list with the list.files function 
 #to use the list.files we chose the similar patter of our data
 list.files(pattern= "c_gls_FCOVER")
-then we assign a name to our list
+#then we assign a name to our list
 rlist <- list.files(pattern= "c_gls_FCOVER")
 #to recall it just digit
 rlist
@@ -108,12 +108,19 @@ fcover_brasil_comparison<-c2018/c2020
 ggexport(fcover_brasil_comparison, filename= "fcoverbrasilcomparison.png", width = 2500, height = 2500, res = 300)
 
 
-#i want to quantify these data
+#i want to see what happened during the 2019 Amazon rainforest wildfires season
+#the wildfires season went from January to October 2019
+#data on https://land.copernicus.vgt.vito.be/PDF/portal/Application.html#Home
+#collection on Fire disturbance
+#monitoring the effect of fires in January, August and October
 
+#list and lapply
+flist <- list.files(pattern="c_gls_BA300")
+flist
+flist_rast <- lapply(flist, raster)
+#not working
 
-
-
-
+january <- raster("c_gls_BA300_PROD-DESC_201901310000_GLOBE_PROBAV_V1.1.1") #not working
 
 
 

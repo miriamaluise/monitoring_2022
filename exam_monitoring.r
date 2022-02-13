@@ -89,10 +89,18 @@ ggexport(fcover_comparison, filename= "fcovercomparison.png", width = 2500, heig
 #now i want to make a close up to the Brasil area
 #i need the crop function to search for the data in a specific region
 #to do so i have to put the coordinates for longitude and latidute
-#Brazil is located at latitude -14.235004 and longitude -51.92528.
+#Brazil is located at latitude from
+#
+#and longitude from
+ext <- c()
+crop2018 <- crop(fcover2018, ext)
+crop2020 <- crop(fcover2020, ext)
 
+#plotting again with ggplot
 
+c2018<- ggplot() + geom_raster(crop2018, mapping = aes(x=x, y=y, fill= FCOVER.1km.2)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover Brasil 2018")
 
+c2020 <- ggplot() + geom_raster(crop2020, mapping = aes(x=x, y=y, fill= FCOVER.1km.1)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover Brasil 2020")
 
 
 

@@ -13,6 +13,7 @@ library(RStoolbox)
 library(ggplot2) #to make plots
 library(patchwork)
 library(viridis) #palette for plots
+library(ggpubr) #to export ggplots
 
 #setting the working directory
 setwd("C:/lab/fcover/")
@@ -81,8 +82,8 @@ fcover_comparison <- p2018/p2019/p2020
 
 #i want to export this
 #install package to export ggplots
-install.packages("ggpubr")
-library(ggpubr)
+#install.packages("ggpubr")
+#library(ggpubr)
 ggexport(fcover_comparison, filename= "fcovercomparison.png", width = 2500, height = 2500, res = 300)
 
 #now i want to make a close up to the Brasil area

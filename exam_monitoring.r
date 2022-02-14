@@ -159,18 +159,39 @@ ndviduring <- raster("c_gls_NDVI_201908210000_GLOBE_PROBAV_V2.2.1.nc")
 #november 2019
 ndviafter <- raster("c_gls_NDVI_201911210000_GLOBE_PROBAV_V2.2.1.nc")
 
+#since our focus is on Brasil, let's crop the data using the coordinates we used before
+ext <- c(-80, -35, -30, 10)
+cropbefore <- crop(ndvibefore, ext)
+cropduring <- crop(ndviduring, ext)
+cropafter <- crop(ndviafter, ext)
 
+#NDVI values close to zero represent bare soil, thus I prefer grey-yellow-beige colors, 
+#NDVI close to 1 represents living vegetation, thus, I prefer green colors. 
+#let's build a colorRampPalette
+cl <- colorRampPalette(c("honeydew", "darkolivegreen3","palegreen4"))(100)
 
+#plotting ndvi before
+plot(cropbefore, col=cl, main="NDVI before wildfire season, November 2018")
+#exporting 
+png("ndvibefore.png", width = 2500, height = 2500, res = 300)
+plot(cropbefore, col=cl, main="NDVI before wildfire season, November 2018")
+dev.off()
 
+#plotting ndvi during
+plot(cropduring, col=cl, main="NDVI during wildfire season, August 2019")
+#exporting 
+png("ndviduring.png", width = 2500, height = 2500, res = 300)
+plot(cropduring, col=cl, main="NDVI during wildfire season, August 2019")
+dev.off()
 
+#plotting NDVI after
+plot(cropafter, col=cl, main="NDVI after wildfire season, November 2019")
+#exporting 
+png("ndviafter.png", width = 2500, height = 2500, res = 300)
+plot(cropafter, col=cl, main="NDVI after wildfire season, November 2019")
+dev.off()
 
-
-
-
-
-
-
-
+#differences
 
 
 

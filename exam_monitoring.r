@@ -107,6 +107,26 @@ fcover_brasil_comparison<-c2018/c2020
 #export this
 ggexport(fcover_brasil_comparison, filename= "fcoverbrasilcomparison.png", width = 2500, height = 2500, res = 300)
 
+#The area of Parà was one of the most impacted by deforestation in 2019
+#let's try and crop the map on that area
+extp <- c(-60, -45, -15, 5)
+para2018 <- crop(fcover2018, extp)
+para2019 <- crop(fcover2019, extp)
+para2020 <- crop(fcover2020, extp)
+
+par(mfrow=c(2,2)) #when i put 2,1 the images don't appear all together
+plot(para2018, col=viridis, main="Parà 2018")
+plot(para2019, col=viridis, main="Parà 2019")
+plot(para2020, col=viridis, main="Parà 2020")
+
+#let's export them
+png("para.png", width = 2500, height = 2500, res = 300)
+par(mfrow=c(2,2))
+plot(para2018, col=viridis, main="Parà 2018")
+plot(para2019, col=viridis, main="Parà 2019")
+plot(para2020, col=viridis, main="Parà 2020")
+dev.off
+
 
 #i want to see what happened during the 2019 Amazon rainforest wildfires season
 #the wildfires season went from January to October 2019

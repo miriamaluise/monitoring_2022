@@ -126,7 +126,7 @@ c2020 <- ggplot() + geom_raster(crop2020, mapping = aes(x=x, y=y, fill= FCOVER.1
 c2020
 #exporting
 ggexport(c2020, filename= "fcoverbrasil2020ggplot.png", width = 2500, height = 2000, res = 300)
-#######################################sono qui
+
 
 fcover_brasil_comparison<-c2018/c2020
 #changes in the spatial extent of vegetation in two years
@@ -164,7 +164,7 @@ para2018 <- crop(fcover2018, extp)
 para2019 <- crop(fcover2019, extp)
 para2020 <- crop(fcover2020, extp)
 
-par(mfrow=c(2,2)) #when i put 2,1 the images don't appear all together
+par(mfrow=c(2,2)) #when i put 2,1 the images don't appear all together, 2018 and 19 one in top of the other, 2020 in a new page
 plot(para2018, col=viridis, main="Parà 2018")
 plot(para2019, col=viridis, main="Parà 2019")
 plot(para2020, col=viridis, main="Parà 2020")
@@ -175,7 +175,7 @@ par(mfrow=c(2,2))
 plot(para2018, col=viridis, main="Parà 2018")
 plot(para2019, col=viridis, main="Parà 2019")
 plot(para2020, col=viridis, main="Parà 2020")
-dev.off
+dev.off()
 
 
 #i want to see what happened during the 2019 Amazon rainforest wildfires season
@@ -195,6 +195,7 @@ dev.off
 #after the wildfire season
 
 #NDVI before should be > NDVIafter
+#setting the working directory since i wanted to make a different folder
 setwd("C:/lab/ndvi/")
 
 #NDVI before the 2019 Amazon rainforest wildfires season
@@ -267,7 +268,7 @@ plot(cropafter, col=cl, main="NDVI after wildfire season, November 2019")
 plot(diffndvi, col=cl, main="NDVI difference")
 dev.off()
 
-
+#####################################################################################################################################################################
 
 
 

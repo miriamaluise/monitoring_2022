@@ -1,7 +1,7 @@
 #################################Exam project for monitoring ecosystems and functioning##################################à
 
-#The report from Greenpeace "Dangerous man, dangerous deals" highlights the dramatic changes impacting the Amazon rainforest under the Brazilian President Jair Bolsonaro 
-#Deforestation has increased by 75.6 percent and fire hotspots alerts grew by 24 percent. 
+#The report from Greenpeace "Dangerous man, dangerous deals" highlights the dramatic changes impacting the Amazon rainforest under the Brazilian President Jair Bolsonaro
+#In just three years deforestation has increased by 75.6 percent and fire hotspots alerts grew by 24 percent. 
 #Greenhouse gas emissions in Brazil increased 9.5 percent since Bolsonaro took office.
 #Bolsonaro assumed office the 1st January 2019
 

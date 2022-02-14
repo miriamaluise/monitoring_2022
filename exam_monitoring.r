@@ -107,6 +107,29 @@ fcover_brasil_comparison<-c2018/c2020
 #export this
 ggexport(fcover_brasil_comparison, filename= "fcoverbrasilcomparison.png", width = 2500, height = 2500, res = 300)
 
+#i can try to use the cividis palette
+#cividis palette is a colorblind-friendly color map
+p1<- ggplot() + geom_raster(crop2018, mapping = aes(x=x, y=y, fill= FCOVER.1km.2)) + scale_fill_viridis(option="cividis") + ggtitle ("Fcover Brasil 2018")
+p1
+#exporting
+ggexport(p1, filename= "fcover2018cividis.png", width = 2500, height = 2000, res = 300)
+
+
+#plotting the image from 2020
+p2 <- ggplot() + geom_raster(crop2020, mapping = aes(x=x, y=y, fill= FCOVER.1km.1)) + scale_fill_viridis(option="cividis") + ggtitle ("Fcover Brasil 2020")
+p2
+#exporting
+ggexport(p1, filename= "fcover2020cividis.png", width = 2500, height = 2000, res = 300)
+
+
+#see them together
+p1/p2
+pcividis <-p1/p2
+#exporting
+ggexport(pcividis, filename= "fcover_comparison_cividis.png", width = 2000, height = 2500, res = 300)
+
+
+
 #The area of Parà was one of the most impacted by deforestation in 2019
 #let's try and crop the map on that area
 extp <- c(-60, -45, -15, 5)
@@ -164,9 +187,11 @@ ext <- c(-80, -35, -30, 10)
 cropbefore <- crop(ndvibefore, ext)
 cropduring <- crop(ndviduring, ext)
 cropafter <- crop(ndviafter, ext)
-
-#NDVI values close to zero represent bare soil, thus I prefer grey-yellow-beige colors, 
-#NDVI close to 1 represents living vegetation, thus, I prefer green colors. 
+#Normalized Difference Vegetation Index (NDVI) quantifies vegetation by measuring the difference 
+#between near-infrared (which vegetation strongly reflects) and red light (which vegetation absorbs).
+#NDVI always ranges from -1 to +1
+#NDVI values close to zero represent bare soil, thus I used grey-beige colors, 
+#NDVI close to 1 represents living vegetation, thus, I used green colors. 
 #let's build a colorRampPalette
 cl <- colorRampPalette(c("honeydew", "darkolivegreen3","palegreen4"))(100)
 
@@ -192,7 +217,28 @@ plot(cropafter, col=cl, main="NDVI after wildfire season, November 2019")
 dev.off()
 
 #differences
+diffndvi<- cropbefore-cropafter
+plot(diffndvi, col=cl, main="NDVI difference")
+#exporting
+png("ndvidifference.png", width = 2500, height = 2500, res = 300)
+plot(diffndvi, col=cl, main="NDVI difference")
+dev.off()
 
+#comparison
+par(mfrow=c(2,2))
+plot(cropbefore, col=cl, main="NDVI before wildfire season, November 2018")
+plot(cropduring, col=cl, main="NDVI during wildfire season, August 2019")
+plot(cropafter, col=cl, main="NDVI after wildfire season, November 2019")
+plot(diffndvi, col=cl, main="NDVI difference")
+
+#exporting
+png("ndvicomparison.png", width = 3500, height = 2500, res = 300)
+par(mfrow=c(2,2))
+plot(cropbefore, col=cl, main="NDVI before wildfire season, November 2018")
+plot(cropduring, col=cl, main="NDVI during wildfire season, August 2019")
+plot(cropafter, col=cl, main="NDVI after wildfire season, November 2019")
+plot(diffndvi, col=cl, main="NDVI difference")
+dev.off()
 
 
 

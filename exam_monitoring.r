@@ -57,16 +57,15 @@ fcover2018 <- fcoverstack$FCOVER.1km.2
 fcover2019 <- fcoverstack$FCOVER.1km.3
 fcover2020 <- fcoverstack$FCOVER.1km.1
 
-#let's plot the image from 2018
-#using a viridis palette needed for raster files
-
-viridis(3)
+#plotting the Fraction of Vegetation Cover (FCover) from 2018
+#saving a viridis palette to use with raster files
+viridis(3) 
 viridis<-colorRampPalette(viridis(3))(100) 
+
 plot(fcover2018, col=viridis, main="Global FCOVER 2018")
 
 #we can save and export our file with PNG and dev.off
 #dev.off is used to close the procedure of exporting the image
-
 
 png("fcover2018.png", width = 2500, height = 2500, res = 300) 
 plot(fcover2018, col=viridis, main="Global FCOVER 2018")

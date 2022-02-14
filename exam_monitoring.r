@@ -1,19 +1,25 @@
 #################################Exam project for monitoring ecosystems and functioning##################################à
 
-#I wanted to study the changes of FCover  
+#The report from Greenpeace "Dangerous man, dangerous deals" highlights the dramatic changes impacting the Amazon rainforest under the Brazilian President Jair Bolsonaro 
+#Deforestation has increased by 75.6 percent and fire hotspots alerts grew by 24 percent. 
+#Greenhouse gas emissions in Brazil increased 9.5 percent since Bolsonaro took office.
+#Bolsonaro assumed office the 1st January 2019
+
+
+#I wanted to study the changes of FCover in a time scale that goes from 2018-2019-2020
 #The Fraction of Vegetation Cover (FCover) corresponds to the fraction of ground covered by green vegetation. 
 #Practically, it quantifies the spatial extent of the vegetation.
-#comparison between 2018-2019-2020
 
+#data on https://land.copernicus.vgt.vito.be/PDF/portal/Application.html#Home
 
 #libraries needed
-library(raster) # Raster data are saved in pixels, each one represents an area on the Earth's surface.
-library(ncdf4)
-library(RStoolbox)
-library(ggplot2) #to make plots
-library(patchwork)
-library(viridis) #palette for plots
-library(ggpubr) #to export ggplots
+library(raster) #Raster data are saved in pixels, each one represents an area on the Earth's surface.
+library(ncdf4) #Used to read Copernicus data
+library(RStoolbox) #Toolbox for remote sensing image processing and analysis
+library(ggplot2) #To make plots
+library(patchwork) #To combine separate ggplots into the same graphic
+library(viridis) #Palette for plots
+library(ggpubr) #To export ggplots
 
 #setting the working directory
 setwd("C:/lab/fcover/")
@@ -69,10 +75,25 @@ dev.off()
 #we can try and plot the three images with ggplot
 
 p2018 <- ggplot() + geom_raster(fcover2018, mapping = aes(x=x, y=y, fill= FCOVER.1km.2)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover 2018")
+#i want to export this
+#install package to export ggplots
+#install.packages("ggpubr")
+#library(ggpubr)
+
+#exporting
+ggexport(p2018, filename= "fcover2018_ggplot.png", width = 2500, height = 1000, res = 300)
+
+#Fcover 2019 with ggplot
 p2019 <- ggplot() + geom_raster(fcover2019, mapping = aes(x=x, y=y, fill= FCOVER.1km.3)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover 2019")
+#exporting
+ggexport(p2019, filename= "fcover2019_ggplot.png", width = 2500, height = 1000, res = 300)
+
+#Fcover 2020 with ggplot
 p2020 <- ggplot() + geom_raster(fcover2020, mapping = aes(x=x, y=y, fill= FCOVER.1km.1)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover 2020")
 #the p is lower 
 #R is case sensitive
+#exporting
+ggexport(p2020, filename= "fcover2020_ggplot.png", width = 2500, height = 1000, res = 300)
 
 
 #to see them all together to make a quick comparison we can use the patchwork library
@@ -80,26 +101,32 @@ p2020 <- ggplot() + geom_raster(fcover2020, mapping = aes(x=x, y=y, fill= FCOVER
 p2018/p2019/p2020
 fcover_comparison <- p2018/p2019/p2020
 
-#i want to export this
-#install package to export ggplots
-#install.packages("ggpubr")
-#library(ggpubr)
+#exporting
 ggexport(fcover_comparison, filename= "fcovercomparison.png", width = 2500, height = 2500, res = 300)
 
 #now i want to make a close up to the Brasil area
-#i need the crop function to search for the data in a specific region
+#with the crop function is possible to search for the data in a specific region
 #to do so i have to put the coordinates for longitude and latidute
 #Brazil is located at latitude from -80 to -35
 #and longitude from -30 to 10
-
+#i store them assigning a name
 ext <- c(-80, -35, -30, 10)
+
+#then i cropped the area of Brasil from 2018 and 2020
 crop2018 <- crop(fcover2018, ext)
 crop2020 <- crop(fcover2020, ext)
 
-#plotting again with ggplot
+#plotting again with ggplot 
 
 c2018<- ggplot() + geom_raster(crop2018, mapping = aes(x=x, y=y, fill= FCOVER.1km.2)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover Brasil 2018")
+#exporting 
+ggexport(c2018, filename= "fcoverbrasil2018ggplot.png", width = 2500, height = 2000, res = 300)
+
 c2020 <- ggplot() + geom_raster(crop2020, mapping = aes(x=x, y=y, fill= FCOVER.1km.1)) + scale_fill_viridis(option="viridis") + ggtitle ("Fcover Brasil 2020")
+c2020
+#exporting
+ggexport(c2020, filename= "fcoverbrasil2020ggplot.png", width = 2500, height = 2000, res = 300)
+#######################################sono qui
 
 fcover_brasil_comparison<-c2018/c2020
 #changes in the spatial extent of vegetation in two years

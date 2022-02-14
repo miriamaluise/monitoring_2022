@@ -131,16 +131,35 @@ dev.off
 #i want to see what happened during the 2019 Amazon rainforest wildfires season
 #the wildfires season went from January to October 2019
 #data on https://land.copernicus.vgt.vito.be/PDF/portal/Application.html#Home
-#collection on Fire disturbance
-#monitoring the effect of fires in January, August and October
+#collection on Fire disturbance not available for that period
+#monitoring the situation in January, August and October
 
-#list and lapply
-flist <- list.files(pattern="c_gls_BA300")
-flist
-flist_rast <- lapply(flist, raster)
-#not working
+#study NDVI
+#The normalized difference vegetation index (NDVI) is a graphical indicator that can be used to analyze remote sensing measurement 
+#assessing whether or not the target being observed contains live green vegetation
+#so NDVI can be used to estimate if vegetation is alive
 
-january <- raster("c_gls_BA300_PROD-DESC_201901310000_GLOBE_PROBAV_V1.1.1") #not working
+#let's investigate the situation:
+#before the wildfire season
+#during the wildfire season
+#after the wildfire season
+
+#NDVI before should be > NDVIafter
+setwd("C:/lab/ndvi/")
+
+#NDVI before the 2019 Amazon rainforest wildfires season
+#november 2018
+ndvibefore <- raster("c_gls_NDVI_201811110000_GLOBE_PROBAV_V2.2.1.nc")
+
+#NDVI during
+#august 2019
+ndviduring <- raster("c_gls_NDVI_201908210000_GLOBE_PROBAV_V2.2.1.nc")
+
+#NDVI after
+#november 2019
+ndviafter <- raster("c_gls_NDVI_201911210000_GLOBE_PROBAV_V2.2.1.nc")
+
+
 
 
 
